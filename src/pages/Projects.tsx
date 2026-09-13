@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { motion, LazyMotion, domAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
@@ -43,7 +43,7 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, index, inView }) => (
+const ProjectCard = ({ project, index, inView }: { project: typeof projects[number]; index: number; inView: boolean }) => (
   <motion.div
     key={project.id}
     initial={{ opacity: 0, y: 20 }}

@@ -32,7 +32,7 @@ const ImageLoader = ({ src, alt, className = '' }: ImageLoaderProps) => {
       className={`${className} ${!isLoaded ? 'blur-sm' : ''}`}
       loading="lazy"
       decoding="async"
-      fetchpriority="high"
+      
     />
   );
 };
