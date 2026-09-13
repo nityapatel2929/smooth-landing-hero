@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Hammer, Package, Home, Ruler, PenTool, HardHat } from 'lucide-react';

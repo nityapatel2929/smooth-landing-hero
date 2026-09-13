@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { PenTool as Tool, Clock, Award, Users, ChevronDown } from 'lucide-react';
@@ -52,7 +52,7 @@ const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonial
 
 const Testimonials = () => {
   const controls = useAnimationControls();
-  const [isPaused, setIsPaused] = useState(false);
+  const [, setIsPaused] = useState(false);
 
   const startAnimation = () => {
     controls.start({
