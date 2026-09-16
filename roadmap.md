@@ -1,0 +1,7 @@
+- [ ] Finish Lovable Cloud CMS schema security validation
+- [ ] Add admin authentication and protected /admin dashboard
+- [ ] Wire /contact, navbar link, and lead submission
+- [ ] Seed current site content and settings
+- [ ] Rewire public pages to database-backed content
+- [ ] Add media storage and CMS CRUD controls
+- [ ] Validate build and preview flows
