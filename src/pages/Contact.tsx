@@ -1,133 +1,20 @@
-
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { FormEvent, useEffect, useState } from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { supabase } from '@/integrations/supabase/client';
+import { asString, fallbackSettings, getPageContent, getSiteSettings, type PageContent, type SiteSettings } from '@/lib/cms';
 
-const Contact = () => {
-  return (
-    <div className="pt-16 min-h-screen">
-      {/* Hero Section */}
-      <div className="relative py-20">
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&q=80"
-            className="w-full h-full object-cover"
-            alt="Workshop Environment"
-          />
-          <div className="absolute inset-0 bg-gray-900/70"></div>
-        </div>
-        <div className="container mx-auto px-4 relative">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white text-center mb-6"
-          >
-            Contact Us
-          </motion.h1>
-        </div>
-      </div>
-      
-      <div className="py-20 px-4 relative">
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&q=80"
-            className="w-full h-full object-cover"
-            alt="Modern Workshop"
-          />
-          <div className="absolute inset-0 bg-white/95"></div>
-        </div>
-        <div className="max-w-4xl mx-auto relative">
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8"
-            >
-              <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
-                    required
-                  ></textarea>
-                </div>
-                
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition duration-300"
-                >
-                  Send Message
-                </button>
-              </form>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8"
-            >
-              <div className="space-y-8">
-                <div className="flex items-start space-x-4">
-                  <Mail className="w-6 h-6 text-primary" />
-                  <div>
-                    <h3 className="font-medium">Email</h3>
-                    <p className="text-gray-600">arvindpatel5862@gmail.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-primary" />
-                  <div>
-                    <h3 className="font-medium">Phone</h3>
-                    <p className="text-gray-600">+91 9377640080</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-primary" />
-                  <div>
-                    <h3 className="font-medium">Address</h3>
-                    <p className="text-gray-600">
-                      Silverstar char rasta<br />
-                      Chandlodiya<br />
-                      Ahemdabad, Gujarat
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Contact;
+export default function Contact() {
+  const [content, setContent] = useState<PageContent>({});
+  const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
+  const [busy, setBusy] = useState(false);
+  useEffect(() => { void Promise.all([getPageContent('contact'), getSiteSettings()]).then(([page, site]) => { setContent(page); setSettings(site); }); }, []);
+  const submit = async (event: FormEvent) => { event.preventDefault(); setBusy(true); setStatus(''); const { error } = await supabase.from('leads').insert(form); setBusy(false); if (error) setStatus('We could not send your message. Please try again.'); else { setForm({ name: '', email: '', message: '' }); setStatus(asString(content.success_message, 'Thanks for reaching out. We will get back to you soon.')); } };
+  const hero = asString(content.hero_background, 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&q=80');
+  const background = asString(content.content_background, 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&q=80');
+  return <div className="pt-16 min-h-screen"><section className="relative py-20"><img src={hero} alt="Interior design workshop" className="absolute inset-0 w-full h-full object-cover" /><div className="absolute inset-0 bg-gray-900/70" /><h1 className="relative text-4xl md:text-5xl font-bold text-white text-center">{asString(content.hero_title, 'Contact Us')}</h1></section><section className="py-20 px-4 relative"><img src={background} alt="Modern interior" className="absolute inset-0 w-full h-full object-cover" /><div className="absolute inset-0 bg-white/95" /><div className="max-w-4xl mx-auto relative grid md:grid-cols-2 gap-8"><motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/90 rounded-lg shadow-lg p-8"><h2 className="text-2xl font-bold mb-6">{asString(content.form_title, 'Tell us about your project')}</h2><form onSubmit={submit} className="space-y-5"><Field label="Name" value={form.name} onChange={(value) => setForm({ ...form, name: value })} required /><Field label="Email" type="email" value={form.email} onChange={(value) => setForm({ ...form, email: value })} required /><label className="block"><span className="block text-sm font-medium text-gray-700">Message</span><textarea required rows={5} value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" /></label><button disabled={busy} className="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-primary-dark disabled:opacity-60">{busy ? 'Sending…' : 'Send Message'}</button>{status && <p className="text-sm text-gray-700" role="status">{status}</p>}</form></motion.div><motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/90 rounded-lg shadow-lg p-8"><div className="space-y-8"><Info icon={<Mail />} label="Email" value={settings.email} /><Info icon={<Phone />} label="Phone" value={settings.phone} /><Info icon={<MapPin />} label="Address" value={settings.address} /></div></motion.div></div></section></div>;
+}
+function Field({ label, value, onChange, required = false, type = 'text' }: { label: string; value: string; onChange: (value: string) => void; required?: boolean; type?: string }) { return <label className="block"><span className="block text-sm font-medium text-gray-700">{label}</span><input required={required} type={type} value={value} onChange={(event) => onChange(event.target.value)} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" /></label>; }
+function Info({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) { return <div className="flex items-start gap-4"><span className="text-primary">{icon}</span><div><h3 className="font-medium">{label}</h3><p className="text-gray-600 whitespace-pre-line">{value}</p></div></div>; }
