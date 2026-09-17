@@ -9,6 +9,8 @@ const Services = lazy(() => import('./pages/Services'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 const LoadingSpinner = () => (
   <div className="min-h-screen bg-white flex items-center justify-center">
@@ -17,9 +19,10 @@ const LoadingSpinner = () => (
 );
 
 function App() {
+  const isAdmin = window.location.pathname.startsWith('/admin');
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Navbar />
+      {!isAdmin && <Navbar />}
       <main className="flex-grow">
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
@@ -28,11 +31,13 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </Suspense>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      {!isAdmin && <Footer />}
+      {!isAdmin && <WhatsAppButton />}
     </div>
   );
 }
