@@ -6,6 +6,7 @@ export type SiteSettings = Tables<'site_settings'>;
 export type Service = Tables<'services'>;
 export type Project = Tables<'projects'>;
 export type Testimonial = Tables<'testimonials'>;
+export type GalleryItem = { url: string; caption?: string };
 
 export const fallbackSettings: SiteSettings = {
   id: 'fallback',
@@ -61,4 +62,9 @@ export function whatsappUrl(number: string): string {
 
 export function iconNameToKey(name: string): string {
   return name || 'Package';
+}
+
+export function galleryItems(value: unknown): GalleryItem[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is GalleryItem => typeof item === 'object' && item !== null && typeof (item as { url?: unknown }).url === 'string');
 }
