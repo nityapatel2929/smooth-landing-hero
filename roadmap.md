@@ -5,3 +5,4 @@
 - [ ] Rewire public pages to database-backed content
 - [ ] Add media storage and CMS CRUD controls
 - [ ] Validate build and preview flows
+- [ ] Resume after Rollup import failure and complete remaining CMS wiring

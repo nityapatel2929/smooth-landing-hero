@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { fallbackSettings, getSiteSettings } from '@/lib/cms';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [businessName, setBusinessName] = useState(fallbackSettings.business_name);
   const location = useLocation();
+  useEffect(() => { void getSiteSettings().then((settings) => setBusinessName(settings.business_name)); }, []);
 
   const navItems = [
     { path: '/', label: 'Home' },
@@ -21,7 +25,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary">ABP Interior</span>
+              <span className="text-2xl font-bold text-primary">{businessName}</span>
             </Link>
           </div>
 
