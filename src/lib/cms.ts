@@ -6,6 +6,8 @@ export type SiteSettings = Tables<'site_settings'>;
 export type Service = Tables<'services'>;
 export type Project = Tables<'projects'>;
 export type Testimonial = Tables<'testimonials'>;
+export type BlogPost = Tables<'blog_posts'>;
+export type Faq = Tables<'faqs'>;
 export type GalleryItem = { url: string; caption?: string };
 
 export const fallbackSettings: SiteSettings = {
@@ -46,6 +48,23 @@ export async function getVisibleProjects(): Promise<Project[]> {
 export async function getVisibleTestimonials(): Promise<Testimonial[]> {
   const { data } = await supabase.from('testimonials').select('*').eq('is_visible', true).order('sort_order');
   return data ?? [];
+}
+
+export async function getVisibleFaqs(pageKey: string, blogPostId?: string): Promise<Faq[]> {
+  let query = supabase.from('faqs').select('*').eq('is_visible', true).eq('page_key', pageKey).order('sort_order');
+  if (blogPostId) query = query.eq('blog_post_id', blogPostId);
+  const { data } = await query;
+  return data ?? [];
+}
+
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+  const { data } = await supabase.from('blog_posts').select('*').eq('is_published', true).order('published_at', { ascending: false });
+  return data ?? [];
+}
+
+export async function getPublishedPost(slug: string): Promise<BlogPost | null> {
+  const { data } = await supabase.from('blog_posts').select('*').eq('slug', slug).eq('is_published', true).maybeSingle();
+  return data;
 }
 
 export function asString(value: unknown, fallback = ''): string {
