@@ -7,3 +7,4 @@
 - [ ] Validate build and preview flows
 - [ ] Resume after Rollup import failure and complete remaining CMS wiring
 - [ ] Restore the visible public preview and complete the remaining CMS-backed site verification
+- [ ] Complete remaining CMS coverage and verify the public pages, contact submission, and admin flow
