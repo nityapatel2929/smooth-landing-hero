@@ -7,8 +7,9 @@ import { fallbackSettings, getSiteSettings } from '@/lib/cms';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [businessName, setBusinessName] = useState(fallbackSettings.business_name);
+  const [logo, setLogo] = useState<string | null>(null);
   const location = useLocation();
-  useEffect(() => { void getSiteSettings().then((settings) => setBusinessName(settings.business_name)); }, []);
+  useEffect(() => { void getSiteSettings().then((settings) => { setBusinessName(settings.business_name); setLogo(settings.logo_url); if (settings.favicon_url) { let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]'); if (!link) { link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); } link.href = settings.favicon_url; } }); }, []);
 
   const navItems = [
     { path: '/', label: 'Home' },
@@ -25,7 +26,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary">{businessName}</span>
+              {logo ? <img src={logo} alt={businessName} className="h-10 w-auto" /> : <span className="text-2xl font-bold text-primary">{businessName}</span>}
             </Link>
           </div>
 

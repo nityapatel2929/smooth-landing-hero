@@ -4,6 +4,6 @@
 - [x] Seed current site content and settings
 - [x] Rewire public pages to database-backed content
 - [x] Add media storage and CMS CRUD controls
-- [ ] Validate build and preview flows
-- [ ] Make admin + blog pages visible in preview (menu links, /blog, /blog/:slug, admin link)
-- [ ] Final verification of public pages, contact submission, and admin screen
+- [x] Validate build and preview flows
+- [x] Make admin + blog pages visible in preview (menu links, /blog, /blog/:slug, admin link)
+- [x] Final verification of public pages, contact submission, and admin screen
