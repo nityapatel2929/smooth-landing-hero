@@ -1,10 +1,9 @@
-- [ ] Finish Lovable Cloud CMS schema security validation
-- [ ] Add admin authentication and protected /admin dashboard
-- [ ] Wire /contact, navbar link, and lead submission
-- [ ] Seed current site content and settings
-- [ ] Rewire public pages to database-backed content
-- [ ] Add media storage and CMS CRUD controls
+- [x] Finish Lovable Cloud CMS schema security validation
+- [x] Add admin authentication and protected /admin dashboard
+- [x] Wire /contact, navbar link, and lead submission
+- [x] Seed current site content and settings
+- [x] Rewire public pages to database-backed content
+- [x] Add media storage and CMS CRUD controls
 - [ ] Validate build and preview flows
-- [ ] Resume after Rollup import failure and complete remaining CMS wiring
-- [ ] Restore the visible public preview and complete the remaining CMS-backed site verification
-- [ ] Complete remaining CMS coverage and verify the public pages, contact submission, and admin flow
+- [ ] Make admin + blog pages visible in preview (menu links, /blog, /blog/:slug, admin link)
+- [ ] Final verification of public pages, contact submission, and admin screen
