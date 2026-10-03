@@ -16,6 +16,11 @@ const Footer = () => {
             <p className="text-gray-400">
               Premium plywood, hardware, and turnkey construction solutions for your dream spaces.
             </p>
+            <div className="flex flex-wrap gap-3 mt-4">
+              {Object.entries((settings.social_links ?? {}) as Record<string, unknown>).filter(([, url]) => typeof url === 'string' && url).map(([name, url]) => (
+                <a key={name} href={url as string} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white capitalize text-sm border border-gray-700 rounded-full px-3 py-1">{name}</a>
+              ))}
+            </div>
           </div>
           
           <div>
@@ -25,7 +30,9 @@ const Footer = () => {
               <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
               <li><Link to="/projects" className="text-gray-400 hover:text-white transition-colors">Projects</Link></li>
               <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/admin" className="text-gray-400 hover:text-white transition-colors">Admin login</Link></li>
             </ul>
           </div>
           
