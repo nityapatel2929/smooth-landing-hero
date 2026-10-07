@@ -38,10 +38,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
-              <li className="text-gray-400">Plywood Supply</li>
-              <li className="text-gray-400">Premium Hardware</li>
-              <li className="text-gray-400">Modular Furniture</li>
-              <li className="text-gray-400">Interior Execution</li>
+              <li><Link to="/plywood-hardware-ahmedabad" className="text-gray-400 hover:text-white">Plywood &amp; Hardware</Link></li>
+              <li><Link to="/residential-interior-construction" className="text-gray-400 hover:text-white">Residential Interiors</Link></li>
+              <li><Link to="/commercial-interior-construction" className="text-gray-400 hover:text-white">Commercial Interiors</Link></li>
+              <li><Link to="/interior-construction-ahmedabad" className="text-gray-400 hover:text-white">Interior Construction</Link></li>
             </ul>
           </div>
           

@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { getPublishedPosts, type BlogPost } from '@/lib/cms';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { publicPageSeo, createBreadcrumbSchema } from '@/lib/seo-content';
+import { usePageSeo } from '@/lib/seo';
 
 export default function Blog() {
+  usePageSeo({ ...publicPageSeo[5], path: '/blog', structuredData: createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }]) });
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => { void getPublishedPosts().then((rows) => { setPosts(rows); setLoaded(true); }); }, []);
   return (
-    <div className="pt-16 min-h-screen">
+    <div className="pt-16 min-h-screen"><Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Blog' }]} />
       <section className="bg-gray-900 py-20 text-center text-white px-4">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
         <p className="text-xl text-gray-300 max-w-2xl mx-auto">Ideas, tips, and stories from our interior projects</p>
@@ -19,7 +23,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
-              {post.cover_image_url && <img src={post.cover_image_url} alt={post.title} className="w-full h-52 object-cover" />}
+              {post.cover_image_url && <img loading="lazy" src={post.cover_image_url} alt={post.title} className="w-full h-52 object-cover" />}
               <div className="p-6 flex flex-col flex-1">
                 {post.published_at && <p className="text-sm text-gray-500 mb-2">{new Date(post.published_at).toLocaleDateString()}</p>}
                 <h2 className="text-xl font-bold mb-3">{post.title}</h2>

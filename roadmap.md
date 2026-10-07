@@ -7,8 +7,8 @@
 - [x] Validate build and preview flows
 - [x] Make admin + blog pages visible in preview (menu links, /blog, /blog/:slug, admin link)
 - [x] Final verification of public pages, contact submission, and admin screen
-- [ ] Complete requested local and technical SEO audit-to-implementation for ABP Interiors
-- [ ] Add unique canonical, metadata, and structured data for existing and new public pages
-- [ ] Add accurate service-detail pages, breadcrumbs, and contextual internal links
-- [ ] Generate a production sitemap from visible CMS records and configure crawler/deep-link files
-- [ ] Improve image loading behavior and verify routes, metadata, structured data, sitemap, and robots rules
+- [x] Complete requested local and technical SEO audit-to-implementation for ABP Interiors
+- [x] Add unique canonical, metadata, and structured data for existing and new public pages
+- [x] Add accurate service-detail pages, breadcrumbs, and contextual internal links
+- [x] Generate a production sitemap from visible CMS records and configure crawler/deep-link files
+- [x] Improve image loading behavior and verify routes, metadata, structured data, sitemap, and robots rules
