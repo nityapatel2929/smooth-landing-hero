@@ -13,6 +13,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const Admin = lazy(() => import('./pages/Admin'));
+const ServiceLanding = lazy(() => import('./pages/ServiceLanding'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const LoadingSpinner = () => (
   <div className="min-h-screen bg-white flex items-center justify-center">
@@ -38,6 +40,8 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin/*" element={<Admin />} />
+            <Route path="/:slug" element={<ServiceLanding />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>

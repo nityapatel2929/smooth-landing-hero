@@ -3,6 +3,8 @@ import { motion, useAnimationControls } from 'framer-motion';
 import { Award, ChevronDown, Clock, PenTool as Tool, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { asString, fallbackSettings, getPageContent, getSiteSettings, getVisibleTestimonials, type PageContent, type SiteSettings, type Testimonial } from '@/lib/cms';
+import { publicPageSeo } from '@/lib/seo-content';
+import { usePageSeo } from '@/lib/seo';
 
 const featureDefaults = [
   ['Premium Quality Interior Design', 'Expert interior designers delivering premium materials and craftsmanship', 'Tool'],
@@ -20,6 +22,7 @@ function Testimonials({ rows }: { rows: Testimonial[] }) {
 }
 
 export default function Home() {
+  usePageSeo({ ...publicPageSeo[0], path: '/' });
   const [content, setContent] = useState<PageContent>({});
   const [settings, setSettings] = useState<SiteSettings>(fallbackSettings);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
