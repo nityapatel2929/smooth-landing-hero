@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://abpinteriors.in/</loc></url>
-  <url><loc>https://abpinteriors.in/services</loc></url>
-  <url><loc>https://abpinteriors.in/projects</loc></url>
   <url><loc>https://abpinteriors.in/about</loc></url>
-  <url><loc>https://abpinteriors.in/contact</loc></url>
   <url><loc>https://abpinteriors.in/blog</loc></url>
-  <url><loc>https://abpinteriors.in/interior-construction-ahmedabad/</loc></url>
-  <url><loc>https://abpinteriors.in/residential-interior-construction/</loc></url>
   <url><loc>https://abpinteriors.in/commercial-interior-construction/</loc></url>
-  <url><loc>https://abpinteriors.in/hotel-interior-construction/</loc></url>
-  <url><loc>https://abpinteriors.in/restaurant-interior-construction/</loc></url>
+  <url><loc>https://abpinteriors.in/contact</loc></url>
   <url><loc>https://abpinteriors.in/corporate-office-interior-construction/</loc></url>
-  <url><loc>https://abpinteriors.in/showroom-retail-interior-construction/</loc></url>
+  <url><loc>https://abpinteriors.in/hotel-interior-construction/</loc></url>
+  <url><loc>https://abpinteriors.in/interior-construction-ahmedabad/</loc></url>
   <url><loc>https://abpinteriors.in/plywood-hardware-ahmedabad/</loc></url>
+  <url><loc>https://abpinteriors.in/projects</loc></url>
+  <url><loc>https://abpinteriors.in/projects/bungalow-makeover</loc></url>
+  <url><loc>https://abpinteriors.in/projects/luxury-apartment</loc></url>
+  <url><loc>https://abpinteriors.in/projects/modern-design-villa</loc></url>
+  <url><loc>https://abpinteriors.in/projects/modern-villa</loc></url>
+  <url><loc>https://abpinteriors.in/residential-interior-construction/</loc></url>
+  <url><loc>https://abpinteriors.in/restaurant-interior-construction/</loc></url>
+  <url><loc>https://abpinteriors.in/services</loc></url>
+  <url><loc>https://abpinteriors.in/showroom-retail-interior-construction/</loc></url>
 </urlset>
