@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Tag } from 'lucide-react';
 import { galleryItems, getVisibleProjects, type Project } from '@/lib/cms';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { SEO_BASE_URL, createBreadcrumbSchema } from '@/lib/seo-content';
+import { createBreadcrumbSchema } from '@/lib/seo-content';
 import { usePageSeo } from '@/lib/seo';
 
 export default function ProjectDetail() {
