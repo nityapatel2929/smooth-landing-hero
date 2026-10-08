@@ -41,13 +41,13 @@ function replaceLink(html, rel, href) {
 function setRouteSchema(html, schema) {
   const tag = '<script type="application/ld+json" id="route-structured-data">' + JSON.stringify(schema).replaceAll('<', '\\u003c') + '</script>';
   return html.includes('id="route-structured-data"')
-    ? html.replace(/<script[^>]*id="route-structured-data"[^>]*>[\\s\\S]*?<\\/script>/i, tag)
+    ? html.replace(/<script[^>]*id="route-structured-data"[^>]*>[\s\S]*?<\/script>/i, tag)
     : html.replace('</head>', `    ${tag}\n  </head>`);
 }
 
 function routeHtml({ path, title, description, image, type = 'website', schema = null }) {
   const canonical = `${SEO_BASE_URL}${path}`;
-  let html = baseHtml.replace(/<title>[\\s\\S]*?<\\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  let html = baseHtml.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
   html = replaceMeta(html, 'name', 'description', description);
   html = replaceMeta(html, 'name', 'robots', 'index, follow');
   html = replaceMeta(html, 'property', 'og:title', title);
@@ -120,7 +120,7 @@ for (const project of projects) {
 for (const post of posts) {
   if (!post.slug || !post.title) continue;
   const path = `/blog/${encodeURIComponent(post.slug)}`;
-  const plainText = (post.content || '').replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();
+  const plainText = (post.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const description = (post.seo_description || plainText || DEFAULT_DESCRIPTION).slice(0, 300);
   const title = post.seo_title || `${post.title} | ABP Interior`;
   const article = { '@type': 'Article', headline: post.title, description, ...(post.published_at ? { datePublished: post.published_at } : {}), ...(post.cover_image_url ? { image: post.cover_image_url } : {}), publisher: { '@id': `${SEO_BASE_URL}/#business` }, mainEntityOfPage: `${SEO_BASE_URL}${path}` };

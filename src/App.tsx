@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import { usePageSeo } from './lib/seo';
 
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
@@ -15,6 +16,11 @@ const BlogPost = lazy(() => import('./pages/BlogPost'));
 const Admin = lazy(() => import('./pages/Admin'));
 const ServiceLanding = lazy(() => import('./pages/ServiceLanding'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+
+function AdminRoute() {
+  usePageSeo({ title: 'Admin | ABP Interior', description: 'ABP Interior content management.', path: '/admin', robots: 'noindex, nofollow' });
+  return <Admin />;
+}
 
 const LoadingSpinner = () => (
   <div className="min-h-screen bg-white flex items-center justify-center">
@@ -39,7 +45,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/admin/*" element={<Admin />} />
+            <Route path="/admin/*" element={<AdminRoute />} />
             <Route path="/:slug" element={<ServiceLanding />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
