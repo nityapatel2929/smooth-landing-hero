@@ -9,7 +9,7 @@
     "build": "vite build",
     "prebuild": "bun scripts/generate-sitemap.mjs",
     "postbuild": "bun scripts/prerender-seo.mjs",
-    "build:dev": "vite build",
+    "build:dev": "bun scripts/generate-sitemap.mjs && vite build && bun scripts/prerender-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
