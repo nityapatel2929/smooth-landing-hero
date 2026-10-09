@@ -11,4 +11,5 @@
 - [x] Add unique canonical, metadata, and structured data for existing and new public pages
 - [x] Add accurate service-detail pages, breadcrumbs, and contextual internal links
 - [x] Generate a production sitemap from visible CMS records and configure crawler/deep-link files
-- [x] Improve image loading behavior and verify routes, metadata, structured data, sitemap, and robots rules
+- [x] Improve image loading behavior
+- [ ] Verify current preview, generated route metadata, sitemap and crawler rules

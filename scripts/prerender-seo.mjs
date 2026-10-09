@@ -77,16 +77,13 @@ const crumbsSchema = (items) => ({
 });
 
 for (const page of publicPageSeo) {
-  let schema = null;
-  if (page.path === '/services' || page.path === '/projects' || page.path === '/blog') {
-    const section = page.path === '/services' ? 'Services' : page.path === '/projects' ? 'Projects' : 'Blog';
-    schema = crumbsSchema([{ name: 'Home', path: '/' }, { name: section, path: page.path }]);
-  }
+  const section = page.path === '/services' ? 'Services' : page.path === '/projects' ? 'Projects' : page.path === '/about' ? 'About' : page.path === '/contact' ? 'Contact' : page.path === '/blog' ? 'Blog' : null;
+  const schema = section ? crumbsSchema([{ name: 'Home', path: '/' }, { name: section, path: page.path }]) : null;
   await writeRoute(page.path, { title: page.title, description: page.description, schema });
 }
 
 for (const page of serviceSeoPages) {
-  const parents = page.path.includes('plywood') ? [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: page.category, path: page.path }] : [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: page.category, path: page.path }];
+  const parents = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: page.category, path: page.path }];
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -96,6 +93,10 @@ for (const page of serviceSeoPages) {
   };
   await writeRoute(`${page.path}/`, { title: page.title, description: page.description, schema });
 }
+
+const adminHtml = routeHtml({ path: '/admin', title: 'Admin | ABP Interior', description: 'ABP Interior content management.', schema: null }).replace('<meta name="robots" content="index, follow" />', '<meta name="robots" content="noindex, nofollow" />');
+await mkdir(resolve(distDir, 'admin'), { recursive: true });
+await writeFile(resolve(distDir, 'admin/index.html'), adminHtml);
 
 const [projects, posts] = await Promise.all([
   readPublicRows('projects', 'slug,title,category,description,cover_image_url,location', 'is_visible'),

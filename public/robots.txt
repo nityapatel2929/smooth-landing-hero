@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /admin
 Disallow: /404.html
 
 Sitemap: https://abpinteriors.in/sitemap.xml
