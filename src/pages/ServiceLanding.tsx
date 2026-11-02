@@ -7,12 +7,19 @@ export default function ServiceLanding() {
   const { slug } = useParams();
   const page = serviceSeoPages.find((item) => item.path === `/${slug}`);
   const crumbs = page ? [{ label: 'Home', path: '/' }, { label: 'Services', path: '/services' }, { label: page.category }] : [];
+  const structuredData = page ? {
+    '@context': 'https://schema.org',
+    '@graph': [
+      createBreadcrumbSchema(crumbs.map((crumb) => ({ name: crumb.label, path: crumb.path ?? page.path }))),
+      { '@type': 'Service', name: page.h1, description: page.description, areaServed: { '@type': 'City', name: 'Ahmedabad' }, provider: { '@id': 'https://abpinteriors.in/#business' } },
+    ],
+  } : null;
   usePageSeo({
     title: page?.title ?? 'Service not found | ABP Interior',
     description: page?.description ?? 'The requested service page could not be found.',
     path: page ? `${page.path}/` : '/404',
     robots: page ? 'index, follow' : 'noindex, follow',
-    structuredData: page ? createBreadcrumbSchema(crumbs.map((crumb) => ({ name: crumb.label, path: crumb.path ?? page.path }))) : null,
+    structuredData,
   });
 
   if (!page) return <div className="mx-auto max-w-4xl px-4 py-24"><h1 className="text-3xl font-bold">Service not found</h1><Link className="mt-5 inline-block text-primary" to="/services">Browse services</Link></div>;
