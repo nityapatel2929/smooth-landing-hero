@@ -1,11 +1,12 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { createBreadcrumbSchema, serviceSeoPages } from '@/lib/seo-content';
 import { usePageSeo } from '@/lib/seo';
 
 export default function ServiceLanding() {
-  const { slug } = useParams();
-  const page = serviceSeoPages.find((item) => item.path === `/${slug}`);
+  const location = useLocation();
+  const routePath = location.pathname.replace(/\/$/, '');
+  const page = serviceSeoPages.find((item) => item.path === routePath);
   const crumbs = page ? [{ label: 'Home', path: '/' }, { label: 'Services', path: '/services' }, { label: page.category }] : [];
   const structuredData = page ? {
     '@context': 'https://schema.org',
