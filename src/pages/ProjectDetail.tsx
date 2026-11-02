@@ -8,7 +8,7 @@ import { usePageSeo } from '@/lib/seo';
 
 export default function ProjectDetail() {
   const { id } = useParams(); const [project, setProject] = useState<Project | null>(null); const [loaded, setLoaded] = useState(false);
-  const projectPath = `/projects/${encodeURIComponent(id ?? '')}`;
+  const projectPath = `/projects/${encodeURIComponent(id ?? '')}/`;
   const description = project?.description || `Explore ${project?.title ?? 'this'} interior project by ABP Interior in Ahmedabad.`;
   const projectSchema = project ? { '@context': 'https://schema.org', '@graph': [createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }, { name: project.title, path: projectPath }]), { '@type': 'CreativeWork', name: project.title, description, ...(project.cover_image_url ? { image: project.cover_image_url } : {}), about: project.category, ...(project.location ? { contentLocation: { '@type': 'Place', name: project.location } } : {}) }] } : null;
   usePageSeo({ title: project ? `${project.title} | ${project.category} in Ahmedabad | ABP Interior` : 'Interior project | ABP Interior', description, path: projectPath, robots: project ? 'index, follow' : loaded ? 'noindex, follow' : 'index, follow', image: project?.cover_image_url, structuredData: projectSchema });
