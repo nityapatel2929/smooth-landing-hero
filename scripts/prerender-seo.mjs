@@ -105,7 +105,7 @@ const [projects, posts] = await Promise.all([
 
 for (const project of projects) {
   if (!project.slug || !project.title) continue;
-  const path = `/projects/${encodeURIComponent(project.slug)}`;
+  const path = `/projects/${encodeURIComponent(project.slug)}/`;
   const description = (project.description || `Explore ${project.title}, a ${project.category || 'interior'} project by ABP Interior in Ahmedabad.`).slice(0, 300);
   const title = `${project.title} | ${project.category || 'Interior Project'} in Ahmedabad | ABP Interior`;
   const schema = {
@@ -120,7 +120,7 @@ for (const project of projects) {
 
 for (const post of posts) {
   if (!post.slug || !post.title) continue;
-  const path = `/blog/${encodeURIComponent(post.slug)}`;
+  const path = `/blog/${encodeURIComponent(post.slug)}/`;
   const plainText = (post.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   const description = (post.seo_description || plainText || DEFAULT_DESCRIPTION).slice(0, 300);
   const title = post.seo_title || `${post.title} | ABP Interior`;

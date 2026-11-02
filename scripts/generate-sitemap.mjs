@@ -33,8 +33,8 @@ const [projects, posts] = await Promise.all([
 ]);
 
 const urls = new Set(staticPaths.map((path) => `${BASE_URL}${path}`));
-for (const project of projects) if (typeof project.slug === 'string' && project.slug) urls.add(`${BASE_URL}/projects/${encodeURIComponent(project.slug)}`);
-for (const post of posts) if (typeof post.slug === 'string' && post.slug) urls.add(`${BASE_URL}/blog/${encodeURIComponent(post.slug)}`);
+for (const project of projects) if (typeof project.slug === 'string' && project.slug) urls.add(`${BASE_URL}/projects/${encodeURIComponent(project.slug)}/`);
+for (const post of posts) if (typeof post.slug === 'string' && post.slug) urls.add(`${BASE_URL}/blog/${encodeURIComponent(post.slug)}/`);
 
 const xmlEscape = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const entries = [...urls].sort().map((url) => `  <url><loc>${xmlEscape(url)}</loc></url>`).join('\n');

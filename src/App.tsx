@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import { usePageSeo } from './lib/seo';
+import { serviceSeoPages } from './lib/seo-content';
 
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
@@ -46,7 +47,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin/*" element={<AdminRoute />} />
-            <Route path="/:slug" element={<ServiceLanding />} />
+            {serviceSeoPages.map((page) => <Route key={page.path} path={page.path} element={<ServiceLanding />} />)}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
