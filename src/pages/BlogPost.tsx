@@ -12,7 +12,7 @@ export default function BlogPost() {
   const [post, setPost] = useState<Post | null>(null);
   const [faqs, setFaqs] = useState<Faq[]>([]);
   const [loaded, setLoaded] = useState(false);
-  const postPath = `/blog/${encodeURIComponent(slug ?? '')}`;
+  const postPath = `/blog/${encodeURIComponent(slug ?? '')}/`;
   const postDescription = post?.seo_description || post?.title || 'Interior design and construction insights from ABP Interior in Ahmedabad.';
   const articleSchema = post ? { '@context': 'https://schema.org', '@graph': [createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }, { name: post.title, path: postPath }]), { '@type': 'Article', headline: post.title, description: postDescription, ...(post.published_at ? { datePublished: post.published_at } : {}), ...(post.cover_image_url ? { image: post.cover_image_url } : {}), publisher: { '@id': `${SEO_BASE_URL}/#business` }, mainEntityOfPage: `${SEO_BASE_URL}${postPath}` }] } : null;
   usePageSeo({ title: post?.seo_title || (post ? `${post.title} | ABP Interior` : 'Article | ABP Interior'), description: postDescription, path: postPath, type: 'article', robots: post ? 'index, follow' : loaded ? 'noindex, follow' : 'index, follow', image: post?.cover_image_url, structuredData: articleSchema });

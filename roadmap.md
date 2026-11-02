@@ -12,4 +12,4 @@
 - [x] Add accurate service-detail pages, breadcrumbs, and contextual internal links
 - [x] Generate a production sitemap from visible CMS records and configure crawler/deep-link files
 - [x] Improve image loading behavior
-- [ ] Verify current preview, generated route metadata, sitemap and crawler rules
+- [x] Verify current preview, generated route metadata, sitemap and crawler rules
