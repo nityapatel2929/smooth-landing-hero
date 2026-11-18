@@ -217,10 +217,15 @@ export type Database = {
           cta_label: string
           cta_url: string | null
           description: string
+          detail_body: string | null
+          detail_heading: string | null
+          detail_path: string | null
           icon_name: string
           id: string
           image_url: string | null
           is_visible: boolean
+          seo_description: string | null
+          seo_title: string | null
           sort_order: number
           title: string
           updated_at: string
@@ -230,10 +235,15 @@ export type Database = {
           cta_label?: string
           cta_url?: string | null
           description: string
+          detail_body?: string | null
+          detail_heading?: string | null
+          detail_path?: string | null
           icon_name?: string
           id?: string
           image_url?: string | null
           is_visible?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
           sort_order?: number
           title: string
           updated_at?: string
@@ -243,10 +253,15 @@ export type Database = {
           cta_label?: string
           cta_url?: string | null
           description?: string
+          detail_body?: string | null
+          detail_heading?: string | null
+          detail_path?: string | null
           icon_name?: string
           id?: string
           image_url?: string | null
           is_visible?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
           sort_order?: number
           title?: string
           updated_at?: string

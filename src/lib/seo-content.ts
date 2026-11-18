@@ -108,6 +108,42 @@ export const serviceSeoPages = [
     ],
     related: ['interior-construction-ahmedabad', 'residential-interior-construction', 'commercial-interior-construction'],
   },
+  {
+    path: '/modular-interior-solutions',
+    title: 'Modular Interior Solutions in Ahmedabad | ABP Interior',
+    h1: 'Modular Interior Solutions',
+    category: 'Modular interiors',
+    description: 'Discuss modular furniture and interior solutions for your home or office in Ahmedabad with ABP Interior.',
+    paragraphs: ['ABP Interior lists modular furniture and interior solutions for homes and offices in Ahmedabad.', 'Discuss your space, requirements, and materials with the team to decide what your project needs.'],
+    related: ['interior-construction-ahmedabad', 'residential-interior-construction'],
+  },
+  {
+    path: '/interior-design-services',
+    title: 'Interior Design Services in Ahmedabad | ABP Interior',
+    h1: 'Interior Design Services in Ahmedabad',
+    category: 'Interior design',
+    description: 'Discuss interior design requirements, project scope and material choices with ABP Interior in Ahmedabad.',
+    paragraphs: ['Discuss your interior design needs, space, and project scope with ABP Interior.', 'Plywood, laminates, MDF, and related hardware are among the interior materials the business supplies.'],
+    related: ['interior-construction-ahmedabad', 'residential-interior-construction'],
+  },
+  {
+    path: '/architectural-planning',
+    title: 'Architectural Planning in Ahmedabad | ABP Interior',
+    h1: 'Architectural Planning',
+    category: 'Architectural planning',
+    description: 'Discuss architectural planning needs for residential and commercial interior projects in Ahmedabad.',
+    paragraphs: ['Discuss architectural planning needs for residential and commercial interiors, including space requirements and project scope.', 'Plywood, laminates, MDF, and related hardware are among the interior materials the business supplies.'],
+    related: ['interior-construction-ahmedabad', 'commercial-interior-construction'],
+  },
+  {
+    path: '/project-management',
+    title: 'Project Management for Interiors in Ahmedabad | ABP Interior',
+    h1: 'Interior Project Management',
+    category: 'Project management',
+    description: 'Discuss interior project coordination, requirements and site supervision with ABP Interior in Ahmedabad.',
+    paragraphs: ['Discuss interior project requirements, coordination, and site supervision needs with ABP Interior.', 'Plywood, laminates, MDF, and related hardware are among the interior materials the business supplies.'],
+    related: ['interior-construction-ahmedabad', 'commercial-interior-construction'],
+  },
 ];
 
 export function createBreadcrumbSchema(items: Array<{ name: string; path: string }>) {

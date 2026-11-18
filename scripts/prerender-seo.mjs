@@ -82,7 +82,24 @@ for (const page of publicPageSeo) {
   await writeRoute(page.path, { title: page.title, description: page.description, schema });
 }
 
-for (const page of serviceSeoPages) {
+const serviceRows = await readPublicRows('services', 'detail_path,detail_heading,detail_body,seo_title,seo_description', 'is_visible');
+const servicePages = new Map(serviceSeoPages.map((page) => [page.path, page]));
+for (const service of serviceRows) {
+  if (typeof service.detail_path !== 'string' || !/^\/[a-z0-9-]+\/?$/.test(service.detail_path)) continue;
+  const path = service.detail_path.replace(/\/$/, '');
+  const fallback = servicePages.get(path);
+  if (fallback) {
+    servicePages.set(path, {
+      ...fallback,
+      title: service.seo_title || fallback.title,
+      h1: service.detail_heading || fallback.h1,
+      description: service.seo_description || fallback.description,
+      paragraphs: service.detail_body ? service.detail_body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean) : fallback.paragraphs,
+    });
+  }
+}
+
+for (const page of servicePages.values()) {
   const parents = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: page.category, path: page.path }];
   const schema = {
     '@context': 'https://schema.org',
@@ -129,4 +146,4 @@ for (const post of posts) {
   await writeRoute(path, { title, description, image: post.cover_image_url, type: 'article', schema });
 }
 
-console.log(`Generated route metadata for ${publicPageSeo.length + serviceSeoPages.length + projects.length + posts.length} public pages.`);
+console.log(`Generated route metadata for ${publicPageSeo.length + servicePages.size + projects.length + posts.length} public pages.`);

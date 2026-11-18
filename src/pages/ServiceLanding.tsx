@@ -2,11 +2,23 @@ import { Link, useLocation } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { createBreadcrumbSchema, serviceSeoPages } from '@/lib/seo-content';
 import { usePageSeo } from '@/lib/seo';
+import { useEffect, useState } from 'react';
+import { getVisibleServices, type Service } from '@/lib/cms';
 
 export default function ServiceLanding() {
   const location = useLocation();
   const routePath = location.pathname.replace(/\/$/, '');
-  const page = serviceSeoPages.find((item) => item.path === routePath);
+  const fallbackPage = serviceSeoPages.find((item) => item.path === routePath);
+  const [services, setServices] = useState<Service[]>([]);
+  useEffect(() => { let active = true; void getVisibleServices().then((rows) => { if (active) setServices(rows); }); return () => { active = false; }; }, [routePath]);
+  const service = services.find((row) => row.detail_path?.replace(/\/$/, '') === routePath);
+  const page = fallbackPage ? {
+    ...fallbackPage,
+    title: service?.seo_title || fallbackPage.title,
+    h1: service?.detail_heading || fallbackPage.h1,
+    description: service?.seo_description || fallbackPage.description,
+    paragraphs: service?.detail_body ? service.detail_body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean) : fallbackPage.paragraphs,
+  } : null;
   const crumbs = page ? [{ label: 'Home', path: '/' }, { label: 'Services', path: '/services' }, { label: page.category }] : [];
   const structuredData = page ? {
     '@context': 'https://schema.org',

@@ -13,3 +13,7 @@
 - [x] Generate a production sitemap from visible CMS records and configure crawler/deep-link files
 - [x] Improve image loading behavior
 - [x] Verify current preview, generated route metadata, sitemap and crawler rules
+- [ ] Update Services cards and add real detail links for all 13 services
+- [ ] Make each service detail page content and SEO editable in the Services editor
+- [ ] Add four new service detail routes to generated and checked-in sitemaps
+- [ ] Verify Services cards, detail pages, CMS fields, and build output

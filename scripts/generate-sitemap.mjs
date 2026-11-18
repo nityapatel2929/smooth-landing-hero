@@ -27,14 +27,16 @@ async function readPublicRows(table, select, filter) {
   return response.json();
 }
 
-const [projects, posts] = await Promise.all([
+const [projects, posts, services] = await Promise.all([
   readPublicRows('projects', 'slug', 'is_visible'),
   readPublicRows('blog_posts', 'slug', 'is_published'),
+  readPublicRows('services', 'detail_path', 'is_visible'),
 ]);
 
 const urls = new Set(staticPaths.map((path) => `${BASE_URL}${path}`));
 for (const project of projects) if (typeof project.slug === 'string' && project.slug) urls.add(`${BASE_URL}/projects/${encodeURIComponent(project.slug)}/`);
 for (const post of posts) if (typeof post.slug === 'string' && post.slug) urls.add(`${BASE_URL}/blog/${encodeURIComponent(post.slug)}/`);
+for (const service of services) if (typeof service.detail_path === 'string' && /^\/[a-z0-9-]+\/?$/.test(service.detail_path)) urls.add(`${BASE_URL}${service.detail_path.replace(/\/$/, '')}/`);
 
 const xmlEscape = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const entries = [...urls].sort().map((url) => `  <url><loc>${xmlEscape(url)}</loc></url>`).join('\n');
