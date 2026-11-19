@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { HardHat, Hammer, Home, Package, PenTool, Ruler, ArrowRight, Building2, Hotel, Utensils, BriefcaseBusiness, Store, type LucideIcon } from 'lucide-react';
+import { HardHat, Hammer, Home, Package, PenTool, Ruler, ArrowRight, Building2, Hotel, Utensils, Briefcase, Store, type LucideIcon } from 'lucide-react';
 import { asString, fallbackSettings, getPageContent, getSiteSettings, getVisibleServices, type PageContent, type Service, type SiteSettings, whatsappUrl } from '@/lib/cms';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { publicPageSeo, createBreadcrumbSchema } from '@/lib/seo-content';
 import { usePageSeo } from '@/lib/seo';
 
-const icons: Record<string, LucideIcon> = { Package, Hammer, Home, PenTool, Ruler, HardHat, Building2, Hotel, Utensils, BriefcaseBusiness, Store };
+const icons: Record<string, LucideIcon> = { Package, Hammer, Home, PenTool, Ruler, HardHat, Building2, Hotel, Utensils, Briefcase, BriefcaseBusiness: Briefcase, Store };
 const fallback = 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80';
 
 export default function Services() {
