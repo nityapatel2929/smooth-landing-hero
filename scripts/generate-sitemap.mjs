@@ -12,6 +12,7 @@ const staticPaths = [
   '/commercial-interior-construction/', '/hotel-interior-construction/',
   '/restaurant-interior-construction/', '/corporate-office-interior-construction/',
   '/showroom-retail-interior-construction/', '/plywood-hardware-ahmedabad/',
+  '/modular-interior-solutions/', '/interior-design-services/', '/architectural-planning/', '/project-management/',
 ];
 
 async function readPublicRows(table, select, filter) {
